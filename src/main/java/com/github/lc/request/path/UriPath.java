@@ -50,4 +50,6 @@ public class UriPath {
 
     public static final String  PUT_POLICY_SCHEDULE="/config/policies/{policyName}/schedules/{scheduleName}";
 
+    private UriPath() {
+    }
 }
