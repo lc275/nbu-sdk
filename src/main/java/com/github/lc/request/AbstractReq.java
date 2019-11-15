@@ -87,8 +87,7 @@ public abstract class AbstractReq {
     protected abstract String uri();
 
     /**
-     * 根据类名获取当前请求的请求类型，类名必须遵循XXMethodReq形式的命名规则，即倒数第二个单词为请求方式
-     * 将驼峰类名转为下划线再转为数组，取倒数第二个单词作为请求方式
+     * parsing the camel case class Name，and get the second last word as request method
      *
      * @return method to request
      */
@@ -97,7 +96,6 @@ public abstract class AbstractReq {
         String replacement = "$1_$2";
         String className = this.getClass().getSimpleName();
         String[] strArray = className.replaceAll(regex, replacement).toUpperCase().split("_");
-        //方法名为类名的倒数第二个单词
         String methodStr = strArray[strArray.length - 2];
         HttpMethod resolvedMethod = HttpMethod.resolve(methodStr);
         if (resolvedMethod == null) {
