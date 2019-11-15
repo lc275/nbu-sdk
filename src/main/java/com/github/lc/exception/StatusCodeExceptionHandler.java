@@ -17,9 +17,9 @@ public class StatusCodeExceptionHandler extends DefaultResponseErrorHandler {
         }catch(HttpStatusCodeException e){
             HttpStatus status = e.getStatusCode();
             String body = e.getResponseBodyAsString();
-            log.error("调用nbu异常,状态码：{},异常信息:{}",status,body);
-            //请求体中包含异常的详细信息，重新抛出
-            throw new ServerClientException(ErrorResp.parseGetMsg(body));
+            log.error("call nbu with exception,status code：{},exception info:{}",status,body);
+            //rethrow exception
+            throw new ServerClientException(ErrorResp.parseErrorBody(body));
         }
     }
 }
