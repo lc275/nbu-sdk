@@ -29,8 +29,6 @@ public class JobDetailsAttributes implements HierarchyObject<JobDetailsAttribute
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String scheduleType;
 
-    private AIRStatus airStatus;
-
     private String groupName;
     //该属性映射job_exec表字段master_id
     private Integer masterId;
