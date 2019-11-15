@@ -1,7 +1,6 @@
 package com.github.lc.response;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.lc.exception.NbuError;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -32,9 +31,9 @@ public class ErrorResp {
         try {
             error = new ObjectMapper().readValue(errorStr, ErrorResp.class);
         } catch (IOException e) {
-            log.error("解析nbu返回的异常信息错误：{}", errorStr);
+            log.error("parse nbu error with exception：{}", errorStr);
         }
-        String resolvedMsg = NbuError.getMsgByCode(error.getErrorCode());
-        return error==null?"调用netbackup异常": (resolvedMsg==null?error.getErrorMessage():resolvedMsg);
+        return error==null?"call netbackup api return with exception": error.toString();
     }
+
 }
