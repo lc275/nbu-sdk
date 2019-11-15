@@ -26,12 +26,12 @@ public class ErrorResp {
     * */
     private String errorMessage;
 
-    public static String parseGetMsg(String errorStr) {
+    public static String parseErrorBody(String body) {
         ErrorResp error = null;
         try {
-            error = new ObjectMapper().readValue(errorStr, ErrorResp.class);
+            error = new ObjectMapper().readValue(body, ErrorResp.class);
         } catch (IOException e) {
-            log.error("parse nbu error with exception：{}", errorStr);
+            log.error("parse nbu error with exception：{}", body);
         }
         return error==null?"call netbackup api return with exception": error.toString();
     }
