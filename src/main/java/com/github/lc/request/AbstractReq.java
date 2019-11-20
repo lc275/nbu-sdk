@@ -143,7 +143,6 @@ public abstract class AbstractReq {
             httpHeaders.add(NBU_GENERIC_SCHEMA, "true");
         }
         if (needAuthorization()) {
-            Assert.notNull(token, "could not get token");
             httpHeaders.add("Authorization", token);
         }
         log.info("request body:{},headers:{}", body, httpHeaders);

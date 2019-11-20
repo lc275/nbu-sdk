@@ -53,15 +53,16 @@ public class ApiClient {
 
     /**
      * execute request and get respoonse of type T
-     * @param request request to be executed
+     *
+     * @param request   request to be executed
      * @param respClass class of response type
-     * @param <T> responseType
+     * @param <T>       responseType
      * @return
      */
     public <T> T execute(AbstractReq request, Class<T> respClass) {
         log.info("request params:{}", request.getUriVariables());
         String token = token(request);
-        ResponseEntity<T> resp = restTemplate.exchange(request.url(masterIpAddress,port), request.httpMethod(), request.httpEntity(token), respClass, request.getUriVariables());
+        ResponseEntity<T> resp = restTemplate.exchange(request.url(masterIpAddress, port), request.httpMethod(), request.httpEntity(token), respClass, request.getUriVariables());
         return resp.getBody();
     }
 
@@ -70,7 +71,11 @@ public class ApiClient {
      * @return token if need to authorize else return null
      */
     private String token(AbstractReq req) {
-        return req.needAuthorization() ? tokenProvider.getToken(masterIpAddress) : null;
+        String token = tokenProvider.getToken(masterIpAddress);
+        if (req.needAuthorization()) {
+            Assert.notNull(token, "could not get token of netbackup master:" + masterIpAddress);
+        }
+        return req.needAuthorization() ? token : null;
     }
 
     /**
