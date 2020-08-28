@@ -31,10 +31,11 @@ public class ApiClientTest {
 
         //build a more complex request
         CatalogImagesGetReq catalogImagesGetReq = new CatalogImagesGetReq();
-        String startTime = "2020-01-01 00:00:00Z000";
-        String endTime = "2020-01-02 00:00:00Z000";
+        String startTime = "2018-01-09T10:03:22.000Z";
+        String endTime = "2018-01-09T10:03:23.000Z";
+        int pageLimit = 100;
         catalogImagesGetReq.putQuery(Query.FILTER, "backupTime ge " + startTime + " and backupTime le " + endTime);
-        catalogImagesGetReq.putQuery(Query.PAGE_LIMIT, 100);
+        catalogImagesGetReq.putQuery(Query.PAGE_LIMIT, pageLimit);
         CatalogImagesResp catalogImagesResp = apiClient.execute(catalogImagesGetReq, CatalogImagesResp.class);
     }
 
